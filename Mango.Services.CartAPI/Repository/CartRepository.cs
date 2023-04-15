@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Mango.Services.CartAPI.DbContexts;
 using Mango.Services.CartAPI.Models;
+using Mango.Services.CartAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.CartAPI.Repository

@@ -5,7 +5,7 @@ namespace Mango.Web.Services
 {
     public class ProductService : BaseService, IProductService
     {
-        private string endpoint = "/api/products/";
+        private static string endpoint = "/api/products/";
         private readonly IHttpClientFactory _httpClientFactory;
 
         public ProductService(IHttpClientFactory httpClientFactory) : base(httpClientFactory)
