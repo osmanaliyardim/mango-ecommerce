@@ -1,4 +1,4 @@
-﻿using Mango.Services.CartAPI.Models;
+﻿using Mango.Services.CartAPI.Models.Dto;
 
 namespace Mango.Services.CartAPI.Repository
 {
