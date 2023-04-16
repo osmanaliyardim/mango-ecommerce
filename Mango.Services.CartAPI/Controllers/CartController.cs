@@ -35,7 +35,7 @@ namespace Mango.Services.CartAPI.Controllers
                 };
             }
 
-            return Ok(_responseDto.Result);
+            return _responseDto;
         }
 
         [HttpPost("AddCart")]
@@ -55,7 +55,7 @@ namespace Mango.Services.CartAPI.Controllers
                 };
             }
 
-            return Ok(_responseDto.Result);
+            return _responseDto.Result;
         }
 
         [HttpPost("UpdateCart")]
@@ -75,7 +75,7 @@ namespace Mango.Services.CartAPI.Controllers
                 };
             }
 
-            return Ok(_responseDto.Result);
+            return _responseDto;
         }
 
         [HttpPost("RemoveCart")]
@@ -95,7 +95,7 @@ namespace Mango.Services.CartAPI.Controllers
                 };
             }
 
-            return Ok(_responseDto.Result);
+            return _responseDto;
         }
 
         [HttpPost("ClearCart/{userId}")]
@@ -115,7 +115,7 @@ namespace Mango.Services.CartAPI.Controllers
                 };
             }
 
-            return Ok(_responseDto.Result);
+            return _responseDto;
         }
     }
 }

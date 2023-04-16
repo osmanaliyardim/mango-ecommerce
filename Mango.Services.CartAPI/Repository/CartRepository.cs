@@ -114,7 +114,7 @@ namespace Mango.Services.CartAPI.Repository
             try
             {
                 CartDetails cartDetails = await _context.CartDetails
-                .FirstOrDefaultAsync(x => x.CartDetailId == cartDetailsId);
+                    .FirstOrDefaultAsync(x => x.CartDetailId == cartDetailsId);
 
                 int totalCountOfCartItems = _context.CartDetails
                     .Where(x => x.CartHeaderId == cartDetails.CartHeaderId).Count();
