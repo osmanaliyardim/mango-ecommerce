@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Mango.Services.CartAPI.DbContexts;
 using Mango.Services.CartAPI;
 using Mango.Services.CartAPI.Repository;
+using Mango.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -52,6 +53,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
