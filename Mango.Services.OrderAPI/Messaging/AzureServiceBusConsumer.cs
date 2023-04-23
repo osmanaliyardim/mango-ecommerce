@@ -40,7 +40,7 @@ namespace Mango.Services.OrderAPI.Messaging
 
             var client = new ServiceBusClient(serviceBusConnectionString);
 
-            _checkoutProcessor = client.CreateProcessor(checkoutMessageTopic, subscriptionName);
+            _checkoutProcessor = client.CreateProcessor(checkoutMessageTopic);
             _paymentStatusProcessor = client.CreateProcessor(paymentResultTopic, subscriptionName);
         }
 
@@ -125,7 +125,8 @@ namespace Mango.Services.OrderAPI.Messaging
                     CVV = orderHeader.CVV,
                     ExpiryMonthYear = orderHeader.ExpiryMonthYear,
                     OrderId = orderHeader.OrderHeaderId,
-                    OrderTotal = orderHeader.OrderTotal
+                    OrderTotal = orderHeader.OrderTotal,
+                    Email = orderHeader.Email
                 };
 
                 try

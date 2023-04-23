@@ -200,7 +200,7 @@ namespace Mango.Services.CartAPI.Controllers
 
                 checkoutHeaderDto.CartDetails = cartDto.CartDetails;
 
-                await _messageBus.PublishMessage(checkoutHeaderDto, "checkoutmessagetopic");
+                await _messageBus.PublishMessage(checkoutHeaderDto, "checkoutqueue");
 
                 await _cartRepository.ClearCart(checkoutHeaderDto.UserId);
             }
