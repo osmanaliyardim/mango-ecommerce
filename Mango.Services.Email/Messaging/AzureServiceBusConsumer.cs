@@ -12,16 +12,19 @@ namespace Mango.Services.Email.Messaging
         private readonly string subscriptionName;
         private readonly string paymentResultTopic;
 
-        private readonly IEmailRepository _emailRepository;
+        //private readonly IEmailRepository _emailRepository;
 
         private ServiceBusProcessor _paymentStatusProcessor;
 
         private readonly IConfiguration _configuration;
 
-        public AzureServiceBusConsumer(IEmailRepository emailRepository, 
-            IConfiguration configuration)
+        private readonly IServiceProvider _serviceProvider;
+
+        public AzureServiceBusConsumer(//IEmailRepository emailRepository, 
+            IConfiguration configuration,
+            IServiceProvider serviceProvider)
         {
-            _emailRepository = emailRepository;
+            //_emailRepository = emailRepository;
             _configuration = configuration;
 
             serviceBusConnectionString = _configuration.GetValue<string>("ServiceBusConnectionString");
@@ -31,6 +34,7 @@ namespace Mango.Services.Email.Messaging
             var client = new ServiceBusClient(serviceBusConnectionString);
 
             _paymentStatusProcessor = client.CreateProcessor(paymentResultTopic, subscriptionName);
+            _serviceProvider = serviceProvider;
         }
 
         public async Task Start()
@@ -66,7 +70,14 @@ namespace Mango.Services.Email.Messaging
 
                 try
                 {
-                    await _emailRepository.SendAndLogEmail(resultMessage);
+                    using (IServiceScope scope = _serviceProvider.CreateScope())
+                    {
+                        IEmailRepository emailRepository =
+                            scope.ServiceProvider.GetRequiredService<IEmailRepository>();
+
+                        await emailRepository.SendAndLogEmail(resultMessage);
+                    }
+
                     await args.CompleteMessageAsync(args.Message);
                 }
                 catch (Exception)
