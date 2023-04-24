@@ -1,5 +1,4 @@
 ﻿using Mango.Services.OrderAPI.Messaging;
-using System.Runtime.CompilerServices;
 
 namespace Mango.Services.OrderAPI.Extensions
 {

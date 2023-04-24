@@ -24,6 +24,7 @@ optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCon
 builder.Services.AddSingleton(new EmailRepository(optionBuilder.Options));
 
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
 
 var app = builder.Build();
 
