@@ -6,6 +6,7 @@ using Mango.Services.CartAPI.DbContexts;
 using Mango.Services.CartAPI;
 using Mango.Services.CartAPI.Repository;
 using Mango.MessageBus;
+using Mango.Services.CartAPI.RabbitMQSender;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -55,6 +56,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+builder.Services.AddSingleton<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
 
 builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(
     options => options.BaseAddress = new Uri(configuration["ServiceUrls:CouponAPI"]));

@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.Email", "Man
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{AC26F216-054D-4664-91F2-11980229809A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango.Gateway", "Mango.GatewayAPI\Mango.Gateway.csproj", "{03250D23-5C06-4440-B676-950105BD42DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.GatewayAPI", "Mango.GatewayAPI\Mango.GatewayAPI.csproj", "{03250D23-5C06-4440-B676-950105BD42DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

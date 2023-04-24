@@ -16,7 +16,7 @@ namespace Mango.Services.OrderAPI.Messaging
         private readonly string paymentTopic;
         private readonly string paymentResultTopic;
 
-        private readonly IOrderRepository _orderRepository;
+        private readonly OrderRepository _orderRepository;
         private readonly IMessageBus _messageBus;
 
         private ServiceBusProcessor _checkoutProcessor;
@@ -24,7 +24,7 @@ namespace Mango.Services.OrderAPI.Messaging
 
         private readonly IConfiguration _configuration;
 
-        public AzureServiceBusConsumer(IOrderRepository orderRepository,
+        public AzureServiceBusConsumer(OrderRepository orderRepository,
             IConfiguration configuration,
             IMessageBus messageBus)
         {

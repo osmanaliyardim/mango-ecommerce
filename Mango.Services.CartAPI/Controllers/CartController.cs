@@ -2,6 +2,7 @@
 using Mango.Services.CartAPI.Messages;
 using Mango.Services.CartAPI.Models;
 using Mango.Services.CartAPI.Models.Dto;
+using Mango.Services.CartAPI.RabbitMQSender;
 using Mango.Services.CartAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,15 +16,18 @@ namespace Mango.Services.CartAPI.Controllers
         private readonly ICouponRepository _couponRepository;
         private readonly IMessageBus _messageBus;
         protected ResponseDto _responseDto;
+        private readonly IRabbitMQCartMessageSender _rabbitMQCartMessageSender;
 
         public CartController(ICartRepository cartRepository, 
             IMessageBus messageBus,
-            ICouponRepository couponRepository)
+            ICouponRepository couponRepository,
+            IRabbitMQCartMessageSender rabbitMQCartMessageSender)
         {
             _cartRepository = cartRepository;
             _couponRepository = couponRepository;
             _messageBus = messageBus;
             _responseDto = new ResponseDto();
+            _rabbitMQCartMessageSender = rabbitMQCartMessageSender;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -200,7 +204,11 @@ namespace Mango.Services.CartAPI.Controllers
 
                 checkoutHeaderDto.CartDetails = cartDto.CartDetails;
 
+                // Azure Service Bus
                 await _messageBus.PublishMessage(checkoutHeaderDto, "checkoutqueue");
+
+                // RabbitMQ
+                //_rabbitMQCartMessageSender.SendMessage(checkoutHeaderDto, "checkoutqueue");
 
                 await _cartRepository.ClearCart(checkoutHeaderDto.UserId);
             }
