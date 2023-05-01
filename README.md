@@ -12,4 +12,4 @@ N-Layer Architecture,
 EF Core,
 SQL Server.
 
-Workshop of .NET Core Microservices - The Complete Guide (.NET 6 MVC) Udemy Course
+Workshop of .NET Core Microservices
